@@ -2,6 +2,7 @@ import {Routes, Route} from "react-router-dom";
 import Login from "./routes/Login";
 import Home from "./routes/Home";
 import Navbar from "./components/Navbar";
+import RequireAuth from "./components/RequireAuth";
 
 Routes;
 const App = () => {
@@ -10,7 +11,13 @@ const App = () => {
       <Navbar />
       <h1>APP</h1>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          }></Route>
         <Route path="/login" element={<Login />}></Route>
       </Routes>
     </>
