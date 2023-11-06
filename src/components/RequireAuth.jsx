@@ -1,9 +1,9 @@
 import {useContext} from "react";
-import {userContext} from "../context/UserProvider";
+import {UserContext} from "../context/UserProvider";
 import {Navigate} from "react-router-dom";
 
 const RequireAuth = ({children}) => {
-  const {user} = useContext(userContext);
+  const {user} = useContext(UserContext);
   if (!user) {
     return <Navigate to="/login" />;
   }

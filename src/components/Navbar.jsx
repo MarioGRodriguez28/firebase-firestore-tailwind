@@ -1,9 +1,9 @@
 import {useContext} from "react";
 import {NavLink} from "react-router-dom";
-import {userContext} from "../context/UserProvider";
+import {UserContext} from "../context/UserProvider";
 
 const Navbar = () => {
-  const {user, signOutUser} = useContext(userContext);
+  const {user, signOutUser} = useContext(UserContext);
 
   const handleClickLogOut = async () => {
     try {

@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import {auth} from "../firebase";
 
-export const userContext = createContext();
+export const UserContext = createContext();
 
 const UserProvider = ({children}) => {
   const [user, setUser] = useState(false);
@@ -34,10 +34,10 @@ const UserProvider = ({children}) => {
   const signOutUser = () => signOut(auth);
 
   return (
-    <userContext.Provider
+    <UserContext.Provider
       value={{user, setUser, registerUser, loginUser, signOutUser}}>
       {children}
-    </userContext.Provider>
+    </UserContext.Provider>
   );
 };
 export default UserProvider;
