@@ -1,43 +1,44 @@
-import { useContext } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserProvider";
-import { errorsFirebase } from "../utils/errorsFirebase";
-import { formValidate } from "../utils/formValidate";
+import {useContext} from "react";
+import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
+import {UserContext} from "../context/UserProvider";
+import {errorsFirebase} from "../utils/errorsFirebase";
+import {formValidate} from "../utils/formValidate";
 
 import FormAlert from "../components/FormAlert";
 import FormInput from "../components/FormInput";
+import Title from "../components/Title";
+import Button from "../components/Button";
 
 const Register = () => {
   const navegate = useNavigate();
-  const { registerUser } = useContext(UserContext);
-  const { required, patternEmail, minLength, validateTrim, validateEquals } =
+  const {registerUser} = useContext(UserContext);
+  const {required, patternEmail, minLength, validateTrim, validateEquals} =
     formValidate();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
     getValues,
     setError,
   } = useForm({
-    defaultValues: {
-    },
+    defaultValues: {},
   });
 
-  const onSubmit = async ({ email, password }) => {
+  const onSubmit = async ({email, password}) => {
     try {
       await registerUser(email, password);
       navegate("/");
     } catch (error) {
-      const { code, message } = errorsFirebase(error);
-      setError(code, { message });
+      const {code, message} = errorsFirebase(error);
+      setError(code, {message});
     }
   };
 
   return (
     <>
-      <h1>Register</h1>
+      <Title text={"Register"} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           type="email"
@@ -46,7 +47,8 @@ const Register = () => {
             required,
             pattern: patternEmail,
           })}
-        >
+          label="Ingresa tu correo"
+          error={errors.email}>
           <FormAlert error={errors.email} />
         </FormInput>
 
@@ -57,7 +59,8 @@ const Register = () => {
             minLength,
             validate: validateTrim,
           })}
-        >
+          label="Ingresa password"
+          error={errors.password}>
           <FormAlert error={errors.password} />
         </FormInput>
 
@@ -67,10 +70,11 @@ const Register = () => {
           {...register("repassword", {
             validate: validateEquals(getValues("password")),
           })}
-        >
+          label="Repite contraseña"
+          error={errors.repassword}>
           <FormAlert error={errors.repassword} />
         </FormInput>
-        <button type="submit">Register</button>
+        <Button text={"Register"} type="submit" />
       </form>
     </>
   );

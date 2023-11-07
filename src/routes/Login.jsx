@@ -7,6 +7,8 @@ import { errorsFirebase } from "../utils/errorsFirebase";
 
 import FormAlert from "../components/FormAlert";
 import FormInput from "../components/FormInput";
+import Title from "../components/Title";
+import Button from "../components/Button";
 
 const Login = () => {
   const navegate = useNavigate();
@@ -35,7 +37,7 @@ const Login = () => {
 
   return (
     <>
-      <h1>Login</h1>
+       <Title text={"Login"}/>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           type="email"
@@ -44,6 +46,8 @@ const Login = () => {
             required,
             pattern: patternEmail,
           })}
+          label ="Ingresa tu correo"
+          error={errors.email}
         >
           <FormAlert error={errors.email} />
         </FormInput>
@@ -54,10 +58,12 @@ const Login = () => {
             minLength,
             validate: validateTrim,
           })}
+          label ="Ingresa tu contraseña"
+          error={errors.password}
         >
           <FormAlert error={errors.password} />
         </FormInput>
-        <button type="submit">Login</button>
+       <Button text={"Login"} type="submit"/>
       </form>
     </>
   );
