@@ -1,3 +1,15 @@
+# useFirestore.js
+
+## Description
+
+The `useFirestore` hook simplifies interactions with Firebase Firestore in a React application. It provides methods for common operations like fetching data, adding new data, updating existing data, deleting data, and searching for specific data.
+
+## Installation
+[https://react-firebase-2-68f74.web.app/login]
+
+Make sure you have Firebase set up in your React project. Install the necessary dependencies:
+
+```bash
 npm install firebase
 Usage
 Import the useFirestore hook into your React component:
