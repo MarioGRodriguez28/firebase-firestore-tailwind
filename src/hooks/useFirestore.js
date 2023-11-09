@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {db, auth} from "../firebase";
 import {
+  getDoc,
   updateDoc,
   deleteDoc,
   collection,
@@ -85,6 +86,17 @@ export const useFirestore = () => {
     }
   };
 
+  const searchData = async (nanoid) => {
+    try {
+      const docRef = doc(db, "urls", nanoid);
+      const docSnap = await getDoc(docRef);
+      return docSnap
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
+
   return {
     data,
     error,
@@ -92,6 +104,7 @@ export const useFirestore = () => {
     getData,
     addData,
     deleteData,
-    updateData
+    updateData,
+    searchData,
   };
 };

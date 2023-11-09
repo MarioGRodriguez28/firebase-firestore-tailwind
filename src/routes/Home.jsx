@@ -10,7 +10,6 @@ import {errorsFirebase} from "../utils/errorsFirebase.js";
 import FormInput from "../components/FormInput";
 import FormError from "../components/FormError.jsx";
 
-
 const Home = () => {
   const [copy, setCopy] = useState({propiedadX: true});
   const {required, patternURL} = formValidate();
