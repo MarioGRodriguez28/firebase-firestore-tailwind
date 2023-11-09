@@ -1,4 +1,4 @@
-const FormAlert = ({error}) => {
+const FormError = ({error}) => {
   return (
     <>
       {error && (
@@ -10,4 +10,4 @@ const FormAlert = ({error}) => {
     </>
   );
 };
-export default FormAlert;
+export default FormError;

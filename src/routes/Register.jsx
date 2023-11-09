@@ -1,18 +1,21 @@
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../context/UserProvider";
 import {errorsFirebase} from "../utils/errorsFirebase";
 import {formValidate} from "../utils/formValidate";
 
-import FormAlert from "../components/FormAlert";
+import FormAlert from "../components/FormError";
 import FormInput from "../components/FormInput";
 import Title from "../components/Title";
 import Button from "../components/Button";
+import LoadingButton from "../components/LoadingButton";
 
 const Register = () => {
   const navegate = useNavigate();
   const {registerUser} = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+
   const {required, patternEmail, minLength, validateTrim, validateEquals} =
     formValidate();
 
@@ -28,11 +31,14 @@ const Register = () => {
 
   const onSubmit = async ({email, password}) => {
     try {
+      setLoading(true)
       await registerUser(email, password);
       navegate("/");
     } catch (error) {
       const {code, message} = errorsFirebase(error);
       setError(code, {message});
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -74,7 +80,8 @@ const Register = () => {
           error={errors.repassword}>
           <FormAlert error={errors.repassword} />
         </FormInput>
-        <Button text={"Register"} type="submit" />
+        <Button text="Login" type="submit " loaing={loading} />
+
       </form>
     </>
   );
